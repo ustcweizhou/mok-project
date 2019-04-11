@@ -908,13 +908,13 @@ $.fn.keyboard = function (passedOptions) {
         //**************************************************************
         switch (options.keyboardPosition) {
             case 'top':
-                $('.keyboard-wrapper').css('top', '20px');
+                $('.keyboard-wrapper').css('top', '10px');
                 break;
             case 'middle':
                 $('.keyboard-wrapper').css('top', ((viewportHeight - keyboardHeight) / 2).toString() + 'px');
                 break;
             default:
-                $('.keyboard-wrapper').css('bottom', '20px');
+                $('.keyboard-wrapper').css('bottom', '10px');
         }
         $('.keyboard-wrapper').css('left', ((viewportWidth - keyboardWidth) / 2).toString() + 'px');
     }
