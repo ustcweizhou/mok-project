@@ -61,6 +61,10 @@ $.fn.keyboard = function (passedOptions) {
         allowEnterAccept = true,
         allowEscapeCancel = true,
         altKey = '',
+        arrowDownKey = '',
+        arrowLeftKey = '',
+        arrowRightKey = '',
+        arrowUpKey = '',
         backspaceKey = '',
         blackoutColor = '25, 25, 25, 0.9',
         cancelColor = '#E74C3C',
@@ -92,6 +96,10 @@ $.fn.keyboard = function (passedOptions) {
         allowEnterAccept,
         allowEscapeCancel,
         altKey,
+        arrowDownKey,
+        arrowLeftKey,
+        arrowRightKey,
+        arrowUpKey,
         backspaceKey,
         blackoutColor,
         cancelColor,
@@ -547,13 +555,18 @@ $.fn.keyboard = function (passedOptions) {
         $('.keyboard-row:eq(2)').prepend('<button class="keyboard-key keyboard-key-lg caps-lock-key" data-keyval="caps lock">Caps Lock</button>');
         $('.keyboard-row:eq(2)').append('<button class="keyboard-key keyboard-key-lg" data-keyval="enter">Enter</button>');
         $('.keyboard-row:eq(3)').prepend('<button class="keyboard-key keyboard-key-lg" data-keyval="shift">Shift</button>');
+        $('.keyboard-row:eq(3)').append('<button class="keyboard-key keyboard-key-sm" data-keyval="arrow up">↑</button>');
         $('.keyboard-row:eq(3)').append('<button class="keyboard-key keyboard-key-lg" data-keyval="shift">Shift</button>');
         $('.keyboard-wrapper').append('<div class="keyboard-row"></div>');
         $('.keyboard-row:eq(4)').append('<button class="keyboard-key keyboard-key-lg" data-keyval="ctrl">Ctrl</button>');
         $('.keyboard-row:eq(4)').append('<button class="keyboard-key keyboard-key-lg" data-keyval="alt">Alt</button>');
         $('.keyboard-row:eq(4)').append('<button class="keyboard-key keyboard-key-xl" data-keyval="space">&nbsp;</button>');
-        $('.keyboard-row:eq(4)').append('<button class="keyboard-key keyboard-key-lg" data-keyval="alt grp">Alt Grp</button>');
+        $('.keyboard-row:eq(4)').append('<button class="keyboard-key keyboard-key-lg" data-keyval="alt">Alt</button>');
+        $('.keyboard-row:eq(4)').append('<button class="keyboard-key keyboard-key-lg" data-keyval="ctrl">Ctrl</button>');
         $('.keyboard-row:eq(4)').append('<button class="keyboard-key keyboard-key-lg" data-keyval="insert">Insert</button>');
+        $('.keyboard-row:eq(4)').append('<button class="keyboard-key keyboard-key-sm" data-keyval="arrow left">←</button>');
+        $('.keyboard-row:eq(4)').append('<button class="keyboard-key keyboard-key-sm" data-keyval="arrow down">↓</button>');
+        $('.keyboard-row:eq(4)').append('<button class="keyboard-key keyboard-key-sm" data-keyval="arrow right">→</button>');
         $('.keyboard-row:eq(4)').append('<button class="keyboard-key keyboard-key-lg" data-keyval="delete">Delete</button>');
     }
 
@@ -729,6 +742,30 @@ $.fn.keyboard = function (passedOptions) {
                     //User-definable callback.
                     if (options.deleteKey && typeof (options.deleteKey) === 'function') {
                         options.deleteKey();
+                    }
+                    break;
+                case 'arrow up':
+                    //User-definable callback.
+                    if (options.arrowUpKey && typeof (options.arrowUpKey) === 'function') {
+                        options.arrowUpKey();
+                    }
+                    break;
+                case 'arrow down':
+                    //User-definable callback.
+                    if (options.arrowDownKey && typeof (options.arrowDownKey) === 'function') {
+                        options.arrowDownKey();
+                    }
+                    break;
+                case 'arrow left':
+                    //User-definable callback.
+                    if (options.arrowLeftKey && typeof (options.arrowLeftKey) === 'function') {
+                        options.arrowLeftKey();
+                    }
+                    break;
+                case 'arrow right':
+                    //User-definable callback.
+                    if (options.arrowRightKey && typeof (options.arrowRightKey) === 'function') {
+                        options.arrowRightKey();
                     }
                     break;
                 case 'tab':
