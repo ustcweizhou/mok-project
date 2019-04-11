@@ -74,6 +74,7 @@ $.fn.keyboard = function (passedOptions) {
         defaultKeyAction = '',
         deleteKey = '',
         directEnter = false,
+        elementId = '',
         enterKey = '',
         escapeKey = '',
         inputFieldRegex = { number: /^(-)?(((\d+)|(\d+\.(\d+)?)|(\.(\d+)?))([eE]([-+])?(\d+)?)?)?$/ },
@@ -109,6 +110,7 @@ $.fn.keyboard = function (passedOptions) {
         defaultKeyAction,
         deleteKey,
         directEnter,
+        elementId,
         enterKey,
         escapeKey,
         inputFieldRegex,
@@ -242,6 +244,14 @@ $.fn.keyboard = function (passedOptions) {
         //*****Handle closure of direct-enter keyboard on element clickaway.*****
         $(document).on('click touch', '*', function (e) {
             e.stopPropagation();
+            if (options.elementId != undefined && options.elementId != '' && $(this).attr('id') != undefined && $(this).attr('id') == options.elementId && !keyboardOpen) {
+                focusedInputField = $(this);
+                keyboardStreamField = focusedInputField;
+                $('.keyboard-wrapper').show();
+                keyboardOpen = true;
+                keyboardStreamField.focus();
+                return;
+            }
             if (keyboardOpen && options.directEnter) {
                 var elementLayer = $(this);
                 if (options.inputType.search(elementLayer.attr('type')) < 1 && options.inputType.search(elementLayer.prop('tagName').toLowerCase()) < 1 && elementLayer.prop('contenteditable') != 'true') {
