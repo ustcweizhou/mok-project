@@ -61,15 +61,20 @@ $.fn.keyboard = function (passedOptions) {
         allowEnterAccept = true,
         allowEscapeCancel = true,
         altKey = '',
+        backspaceKey = '',
         blackoutColor = '25, 25, 25, 0.9',
         cancelColor = '#E74C3C',
         cancelTextColor = '#FFFFFF',
         capsLightColor = '#3498DB',
         ctrlKey = '',
+        defaultKeyAction = '',
+        deleteKey = '',
         directEnter = false,
         enterKey = '',
+        escapeKey = '',
         inputFieldRegex = { number: /^(-)?(((\d+)|(\d+\.(\d+)?)|(\.(\d+)?))([eE]([-+])?(\d+)?)?)?$/ },
         inputType = '',
+        insertKey = '',
         keyCharacterRegex = { number: /[0-9]|[eE]|\.|\+|-/, tel: /[0-9]|\.|\+|-|#|\(|\)/ },
         keyColor = '#E0E0E0',
         keyTextColor = '#555555',
@@ -87,15 +92,20 @@ $.fn.keyboard = function (passedOptions) {
         allowEnterAccept,
         allowEscapeCancel,
         altKey,
+        backspaceKey,
         blackoutColor,
         cancelColor,
         cancelTextColor,
         capsLightColor,
         ctrlKey,
+        defaultKeyAction,
+        deleteKey,
         directEnter,
         enterKey,
+        escapeKey,
         inputFieldRegex,
         inputType: setInputType(inputType),
+        insertKey,
         keyboardPosition,
         keyCharacterRegex,
         keyColor,
@@ -529,8 +539,10 @@ $.fn.keyboard = function (passedOptions) {
 
         if (!$('.keyboard-action-wrapper').length && !options.directEnter) {
             $('.keyboard-wrapper').prepend('<div class="keyboard-action-wrapper"><button class="keyboard-action-button keyboard-cancel-button">Cancel</button><input type="text" class="keyboard-input-field"><button class="keyboard-action-button keyboard-accept-button">Accept</button></div>');
+        } else {
+            $('.keyboard-row:eq(0)').prepend('<button class="keyboard-key keyboard-key-lg" data-keyval="escape">Esc</button>');
         }
-        $('.keyboard-row:eq(0)').append('<button class="keyboard-key keyboard-key-lg" data-keyval="backspace">Backspace</button>');
+        $('.keyboard-row:eq(0)').append('<button class="keyboard-key keyboard-key-lg" data-keyval="backspace">Bksp</button>');
         $('.keyboard-row:eq(1)').prepend('<button class="keyboard-key keyboard-key-lg" data-keyval="tab">Tab</button>');
         $('.keyboard-row:eq(2)').prepend('<button class="keyboard-key keyboard-key-lg caps-lock-key" data-keyval="caps lock">Caps Lock</button>');
         $('.keyboard-row:eq(2)').append('<button class="keyboard-key keyboard-key-lg" data-keyval="enter">Enter</button>');
@@ -538,14 +550,11 @@ $.fn.keyboard = function (passedOptions) {
         $('.keyboard-row:eq(3)').append('<button class="keyboard-key keyboard-key-lg" data-keyval="shift">Shift</button>');
         $('.keyboard-wrapper').append('<div class="keyboard-row"></div>');
         $('.keyboard-row:eq(4)').append('<button class="keyboard-key keyboard-key-lg" data-keyval="ctrl">Ctrl</button>');
-        $('.keyboard-row:eq(4)').append(`<button class="keyboard-key keyboard-key-lg language-button" data-keyval="language">
-        <span style="color: ${languageKeyTextColor};" data-keyval="language">${languageButtonText}</span>
-        </button>`);
         $('.keyboard-row:eq(4)').append('<button class="keyboard-key keyboard-key-lg" data-keyval="alt">Alt</button>');
         $('.keyboard-row:eq(4)').append('<button class="keyboard-key keyboard-key-xl" data-keyval="space">&nbsp;</button>');
         $('.keyboard-row:eq(4)').append('<button class="keyboard-key keyboard-key-lg" data-keyval="alt grp">Alt Grp</button>');
-        $('.keyboard-row:eq(4)').append('<button class="keyboard-key keyboard-key-lg" data-keyval="spare">&nbsp;</button>');
-        $('.keyboard-row:eq(4)').append('<button class="keyboard-key keyboard-key-lg" data-keyval="ctrl">Ctrl</button>');
+        $('.keyboard-row:eq(4)').append('<button class="keyboard-key keyboard-key-lg" data-keyval="insert">Insert</button>');
+        $('.keyboard-row:eq(4)').append('<button class="keyboard-key keyboard-key-lg" data-keyval="delete">Delete</button>');
     }
 
     //***********************************************************************************
@@ -684,6 +693,11 @@ $.fn.keyboard = function (passedOptions) {
                     }
                     break;
                 case 'backspace':
+                    //User-definable callback.
+                    if (options.backspaceKey && typeof (options.backspaceKey) === 'function') {
+                        options.backspaceKey();
+                        break;
+                    }
                     keyboardStreamField.val(keyboardStreamField.val().slice(0, caretPosition - 1) + keyboardStreamField.val().slice(caretPosition));
                     caretPosition -= 1;
                     keyboardStreamField.focus();
@@ -697,6 +711,24 @@ $.fn.keyboard = function (passedOptions) {
                     //User-definable callback.
                     if (options.enterKey && typeof (options.enterKey) === 'function') {
                         options.enterKey();
+                    }
+                    break;
+                case 'escape':
+                    //User-definable callback.
+                    if (options.escapeKey && typeof (options.escapeKey) === 'function') {
+                        options.escapeKey();
+                    }
+                    break;
+                case 'insert':
+                    //User-definable callback.
+                    if (options.insertKey && typeof (options.insertKey) === 'function') {
+                        options.insertKey();
+                    }
+                    break;
+                case 'delete':
+                    //User-definable callback.
+                    if (options.deleteKey && typeof (options.deleteKey) === 'function') {
+                        options.deleteKey();
                     }
                     break;
                 case 'tab':
@@ -751,6 +783,12 @@ $.fn.keyboard = function (passedOptions) {
                     }
                 }
                 deadkeySet = deadkeyPressed;
+            }
+
+            //User-definable callback.
+            if (options.defaultKeyAction && typeof (options.defaultKeyAction) === 'function') {
+                options.defaultKeyAction(keyPressed);
+                return;
             }
 
             //*****Write key value and update input attributes.*****
