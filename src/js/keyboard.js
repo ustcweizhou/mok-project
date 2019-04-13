@@ -562,6 +562,7 @@ $.fn.keyboard = function (passedOptions) {
         }
         $('.keyboard-row:eq(0)').append('<button class="keyboard-key keyboard-key-lg" data-keyval="backspace">Bksp</button>');
         $('.keyboard-row:eq(1)').prepend('<button class="keyboard-key keyboard-key-lg" data-keyval="tab">Tab</button>');
+        $('.keyboard-row:eq(1)').append('<button class="keyboard-key keyboard-key-lg" data-keyval="insert">Ins</button>');
         $('.keyboard-row:eq(2)').prepend('<button class="keyboard-key keyboard-key-lg caps-lock-key" data-keyval="caps lock">Caps Lock</button>');
         $('.keyboard-row:eq(2)').append('<button class="keyboard-key keyboard-key-lg" data-keyval="enter">Enter</button>');
         $('.keyboard-row:eq(3)').prepend('<button class="keyboard-key keyboard-key-lg" data-keyval="shift">Shift</button>');
@@ -569,15 +570,17 @@ $.fn.keyboard = function (passedOptions) {
         $('.keyboard-row:eq(3)').append('<button class="keyboard-key keyboard-key-lg" data-keyval="shift">Shift</button>');
         $('.keyboard-wrapper').append('<div class="keyboard-row"></div>');
         $('.keyboard-row:eq(4)').append('<button class="keyboard-key keyboard-key-lg" data-keyval="ctrl">Ctrl</button>');
+        $('.keyboard-row:eq(4)').append(`<button class="keyboard-key keyboard-key-lg language-button" data-keyval="language">
+        <span style="color: ${languageKeyTextColor};" data-keyval="language">${languageButtonText}</span>
+        </button>`);
         $('.keyboard-row:eq(4)').append('<button class="keyboard-key keyboard-key-lg" data-keyval="alt">Alt</button>');
         $('.keyboard-row:eq(4)').append('<button class="keyboard-key keyboard-key-xl" data-keyval="space">&nbsp;</button>');
         $('.keyboard-row:eq(4)').append('<button class="keyboard-key keyboard-key-lg" data-keyval="alt">Alt</button>');
         $('.keyboard-row:eq(4)').append('<button class="keyboard-key keyboard-key-lg" data-keyval="ctrl">Ctrl</button>');
-        $('.keyboard-row:eq(4)').append('<button class="keyboard-key keyboard-key-lg" data-keyval="insert">Insert</button>');
         $('.keyboard-row:eq(4)').append('<button class="keyboard-key keyboard-key-sm" data-keyval="arrow left">←</button>');
         $('.keyboard-row:eq(4)').append('<button class="keyboard-key keyboard-key-sm" data-keyval="arrow down">↓</button>');
         $('.keyboard-row:eq(4)').append('<button class="keyboard-key keyboard-key-sm" data-keyval="arrow right">→</button>');
-        $('.keyboard-row:eq(4)').append('<button class="keyboard-key keyboard-key-lg" data-keyval="delete">Delete</button>');
+        $('.keyboard-row:eq(4)').append('<button class="keyboard-key keyboard-key-lg" data-keyval="delete">Del</button>');
     }
 
     //***********************************************************************************
