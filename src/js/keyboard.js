@@ -575,7 +575,7 @@ $.fn.keyboard = function (passedOptions) {
         </button>`);
         $('.keyboard-row:eq(4)').append('<button class="keyboard-key keyboard-key-lg" data-keyval="alt">Alt</button>');
         $('.keyboard-row:eq(4)').append('<button class="keyboard-key keyboard-key-xl" data-keyval="space">&nbsp;</button>');
-        $('.keyboard-row:eq(4)').append('<button class="keyboard-key keyboard-key-lg" data-keyval="alt">Alt</button>');
+        $('.keyboard-row:eq(4)').append('<button class="keyboard-key keyboard-key-lg" data-keyval="alt grp">Alt Grp</button>');
         $('.keyboard-row:eq(4)').append('<button class="keyboard-key keyboard-key-lg" data-keyval="ctrl">Ctrl</button>');
         $('.keyboard-row:eq(4)').append('<button class="keyboard-key keyboard-key-sm" data-keyval="arrow left">←</button>');
         $('.keyboard-row:eq(4)').append('<button class="keyboard-key keyboard-key-sm" data-keyval="arrow down">↓</button>');
