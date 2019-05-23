@@ -678,6 +678,7 @@ $.fn.keyboard = function (passedOptions) {
             caretPosition = keyboardStreamField[0].selectionStart;
 
         keyPressed = keyPressed.replace('&lt;', '<').replace('&gt;', '>').replace(/\bspace/, ' '); //Acount for &lt; and &gt; escaping.
+        keyPressed = keyPressed.replace('&amp;', '&'); // &amp; to &
 
         if (keyPressed.length > 2) {
             deadkeyPressed = '';
